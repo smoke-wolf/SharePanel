@@ -15,7 +15,7 @@ SharePanel is a PHP-based file management system designed to offer fine-grained 
 
 1. Clone or download the repository.
     - If cloned via Git:
-        1. Upload the files from the `Server-Backdoor` directory.
+        1. Upload the files from the `SharePanel` directory.
     - If downloaded as a .zip:
         1. Unpack the zip and upload all the files.
 
