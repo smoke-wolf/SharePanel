@@ -4,11 +4,6 @@
 
 This Manager is a PHP-based file management tool that allows authenticated users to perform various file operations, including viewing, editing, renaming, moving, deleting, and creating files. The tool is designed with different permission levels for developers, ensuring secure and controlled access to file operations.
 
-## Prerequisites
-
-- PHP installed on your server
-- A web server (e.g., Apache, Nginx)
-- JSON file (`Users/Users.json`) with user data and tokens
 
 ## Installation
 
