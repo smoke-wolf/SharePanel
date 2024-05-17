@@ -1,0 +1,9 @@
+{
+  "0bd77f14fdf729eef2dcb9bb5dd97a7f": {
+    "username": "ADMIN",
+    "password": "Password",
+    "developer_level": 5,
+    "email": "example@example.com",
+    "allowed_dirs": "/"
+  }
+}
