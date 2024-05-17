@@ -1,104 +1,104 @@
-# Server Manager README
+# SharePanel (Single PHP Manager)
 
-## Overview
+SharePanel is a PHP-based file management system designed to offer fine-grained access control for developers based on their permission levels. This application supports various file operations such as viewing, uploading, creating, renaming, deleting, moving, and compressing, with restrictions based on user permissions and directories.
 
-This Manager is a PHP-based file management tool that allows authenticated users to perform various file operations, including viewing, editing, renaming, moving, deleting, and creating files. The tool is designed with different permission levels for developers, ensuring secure and controlled access to file operations.
+## Features
 
+- **User Authentication**: Users are authenticated via a token passed in the URL.
+- **Permission Levels**: Different operations are allowed based on the user's developer level.
+- **File Operations**: Users can view, upload, create, rename, delete, move, and compress files and folders.
+- **Directory Restrictions**: Access to certain files and directories can be restricted based on user permissions.
+- **Search Functionality**: Users can search for files within the current directory.
+- **UI Elements**: A responsive and interactive UI for performing file operations.
 
 ## Installation
 
-1. **Clone or Download the Repository:**
-   Clone the repository or download the source code to your server.
+1. Clone or download the repository.
+    - If cloned via Git:
+        1. Upload the files from the `Server-Backdoor` directory.
+    - If downloaded as a .zip:
+        1. Unpack the zip and upload all the files.
 
-2. **Directory Structure:**
-   Ensure your directory structure includes the `Users/Users.json` file in the appropriate location.
+2. Once the files are uploaded:
+    1. Navigate to `https://your/application.com/developer_login.php`.
+    2. Log in with the following credentials:
+        - **Username**: ADMIN
+        - **Password**: Password
+    3. Create a new account by going to `https://your/application.com/create_account.php`.
+    4. Edit the `Users/Users.json` file:
+        - Increase the `"developer_level"` to 5.
+        - Change `"allowed_dirs": "/Your_App"` to `"allowed_dirs": "/"`.
+    5. Delete the ADMIN account and log in with the newly created account.
 
-3. **Users JSON Structure:**
-   The `Users/Users.json` file should have the following structure:
-   ```json
-   {
-       "token1": {
-           "developer_level": 1
-       },
-       "token2": {
-           "developer_level": 2
-       },
-       ...
-   }
-   ```
+3. Customize your application:
+    1. Change restricted files on `line 38`.
+    2. Change your application name on `line 668` and `line 685`.
+    3. Add your login redirect on `line 8`.
+    4. Add your create_account redirect on `line 16`.
 
-## Configuration
+4. Add team members:
+    1. Get your team members to create an account at `https://your/application.com/create_account.php`.
+    2. Assign permissions in `Users/Users.json`:
+        - **Level 1**: Basic file viewing and searching.
+        - **Level 2**: Advanced viewing options.
+        - **Level 3**: Saving and uploading files.
+        - **Level 4**: Creating new files, folders, and moving files.
+        - **Level 5**: Full access, including restricted areas and file operations.
+    3. For specific directory access:
+        - Modify `"allowed_dirs": "/Your_App"` to `"allowed_dirs": "/Your_App/Subdir"`.
 
-- **Permissions:**
-  - `1`: Basic operations like searching files.
-  - `2`: Viewing and downloading files.
-  - `3`: Creating new files and renaming files.
-  - `4`: Deleting and moving files.
-  - `5`: Special permissions for restricted areas.
+## File Operations
 
-- **Ensure Secure Token Storage:**
-  Store tokens securely and use HTTPS to avoid token interception.
+### Viewing Files
+- Users can view files by clicking on the file name.
+- Access is restricted based on the user's `allowed_dirs`.
 
-## Usage
+### Uploading Files
+- Accessible to users with level 3 or higher.
+- Restricted files and directories are not uploadable.
 
-1. **Access the Application:**
-   Open your browser and navigate to the URL where the application is hosted. Include the token in the URL:
-   ```
-   http://yourdomain.com/path/to/application?token=YOUR_TOKEN
-   ```
+### Creating Files and Folders
+- Users with level 4 or higher can create new files and folders.
+- Restricted directories cannot have new files or folders created.
 
-2. **File Operations:**
-   - **View Files:**
-     Click on file names to view their contents.
-   - **Download Files:**
-     Click on the "Download" link next to a file.
-   - **Search Files:**
-     Use the search bar to search for files within the directory.
-   - **Sort Files:**
-     Click on the headers (Name, Last Modified, Size) to sort files.
+### Renaming, Moving, and Deleting
+- Renaming, moving, and deleting files are available to users with level 4 or higher.
+- Special permissions (level 5) are required for operations in restricted directories.
 
-3. **Sidebar Operations:**
-   - **Rename File:**
-     Click "Rename" in the sidebar, fill in the old and new filenames, and submit.
-   - **Move File:**
-     Click "Move" in the sidebar, provide the filename and the new path, and submit.
-   - **Delete File:**
-     Click "Delete" in the sidebar, provide the filename, and submit.
-   - **Create New File:**
-     Click "New File" in the sidebar, provide the new filename, and submit.
+### Compressing Files
+- Users with level 4 or higher can compress files into zip archives.
+- Restricted files cannot be compressed without proper permissions.
 
-4. **View Modal:**
-   Click on a file name to view and edit its contents in a modal window. Save changes by submitting the form.
+### Searching Files
+- Available to users with level 1 or higher.
+- Searches for files within the current directory.
 
-## Security
+### Sidebar Operations
+- **Rename**: Opens a modal to rename a file.
+- **Move**: Opens a modal to move a file to a different directory.
+- **Delete**: Opens a modal to delete a file.
+- **New File**: Opens a modal to create a new file.
+- **New Folder**: Opens a modal to create a new folder.
+- **Upload File**: Opens a modal to upload a file.
+- **Compress File**: Opens a modal to compress a file.
 
-- **Directory Traversal Protection:**
-  The script includes checks to prevent directory traversal attacks.
-- **Access Restrictions:**
-  Certain directories and files (e.g., `access.php`) are restricted based on developer level.
-- **Token Validation:**
-  Only users with valid tokens and sufficient permissions can perform operations.
+## Security Considerations
 
-## Customization
-
-- **Styling:**
-  Modify `style.css` or the `<style>` section in the HTML to change the look and feel.
-- **Additional Features:**
-  Extend functionality by adding more cases in the `$_POST['action']` switch statement or creating new functions.
+- Ensure the `Users/Users.json` file is not accessible via the web. Use an `.htaccess` file to cover this.
+- Validate and sanitize all user inputs to prevent security vulnerabilities.
+- Use HTTPS to protect token and data transmission.
 
 ## Troubleshooting
 
-- **Token Issues:**
-  Ensure tokens are correctly passed via the URL.
-- **File Not Found:**
-  Verify the path and permissions for the `Users/Users.json` file.
-- **Permissions:**
-  Check the developer level for the user token to ensure they have the required permissions for the action.
+- **Token not provided**: Ensure the token is included in the URL.
+- **Users file not found**: Ensure `Users/Users.json` exists and is correctly formatted.
+- **Invalid token**: Verify the token against the `Users/Users.json` data.
+- **Insufficient permission**: Ensure the user has the correct `developer_level` for the desired operation.
+
+## Contributing
+
+Contributions are welcome! Please submit pull requests or open issues for any bugs or feature requests.
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
-
-## Acknowledgements
-
-This application was developed with inspiration from various file management tools and aims to provide a secure, flexible, and easy-to-use solution for managing files via a web interface.
+See the LICENSE file for details.
