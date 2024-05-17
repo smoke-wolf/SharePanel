@@ -21,7 +21,8 @@ function createUserArray($username, $password, $developer_level = 0, $email = ''
     $user = [
         "username" => $username,
         "password" => $password,
-        "developer_level" => $developer_level
+        "developer_level" => $developer_level,
+        "allowed_dirs" => "Your_App"
     ];
     if ($email) {
         $user["email"] = $email;
