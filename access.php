@@ -5,7 +5,7 @@
 if (!isset($_GET['token'])) {
     http_response_code(400);
     echo "Token not provided";
-    header('Location: https://sd83.000webhostapp.com/Tungsten/developer_login.php');
+    echo '<meta http-equiv="refresh" content="0;url=https://example.com">'; // https://yourapplication.com/developer_login.php
     exit;
 }
 
@@ -13,7 +13,7 @@ if (!isset($_GET['token'])) {
 $users_file = 'Users/Users.json';
 if (!file_exists($users_file)) {
     http_response_code(500);
-     header('Location: https://sd83.000webhostapp.com/Tungsten/create_account.php');
+     echo '<meta http-equiv="refresh" content="0;url=https://example.com">'; // https://yourapplication.com/create_account.php
     echo "Users file not found";
     exit;
 }
@@ -35,7 +35,7 @@ $base_dir = __DIR__;
 $current_dir = isset($_GET['dir']) ? realpath($base_dir . '/' . $_GET['dir']) : $base_dir;
 
 // List of restricted files
-$restricted_files = ['.htaccess', 'Users/Users.json', 'acc.php', 'access.php', 'check.php', 'create_account.php', 'developer_login.php'];
+$restricted_files = ['.htaccess']; // add aditional files for your usecase
 
 // Function to check if the file is restricted
 function is_restricted_file($file_to_view, $user_info, $developer_level) {
@@ -665,7 +665,7 @@ button:hover {
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tungsten Manager</title>
+    <title>Your App Name</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -682,7 +682,7 @@ button:hover {
     <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
 
     <div class="container" id="container">
-        <h1>Tungsten Manager</h1>
+        <h1>Your App Name</h1>
         <div class="search-bar">
             <input type="text" id="search-query" placeholder="Search files">
             <button onclick="searchFiles()">Search</button>
