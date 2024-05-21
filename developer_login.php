@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($user['username'] === $username && $user['password'] === $password) {
             $_SESSION['token'] = $token;
             if ($user['developer_level'] > 0) {
-                header('Location: https://sd83.000webhostapp.com/Tungsten/access.php?token=' . $token);
+                header('Location: https://yourserver.com/yourapp/access.php?token=' . $token);
                 exit;
             } else {
                 $error = 'Insufficient permissions.';
