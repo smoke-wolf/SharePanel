@@ -1,5 +1,6 @@
 # SharePanel (Single PHP Manager)
-
+Wendsay may 22- **I've added a number of security mesures and other features related to the corperate or group aspects of the software ** | I will be releasing this on our website.
+---
 SharePanel is a PHP-based file management system designed to offer fine-grained access control for developers based on their permission levels. This application supports various file operations such as viewing, uploading, creating, renaming, deleting, moving, and compressing, with restrictions based on user permissions and directories.
 
 ## Features
